@@ -3,23 +3,43 @@ $myPATH = ini_get('include_path') . ':./include:../include:../../include';
 ini_set('include_path', $myPATH);
 include("conf.inc");
 
+if (!in_array($_SERVER["REMOTE_ADDR"], $origins)){
+  http_response_code(404);
+  die();
+}
+
 echo "<PRE>";
 //var_dump($origins);
+//echo $_SERVER["REMOTE_ADDR"] . "\n";
 
 echo "=============================== HPC Queue Status ===============================\n";
-$command = $dest['shell'] . " " . $dest['host2'] . " " . $dest['new_queue_status'];
+$command = $dest['shell'] . " " . $dest['hostname'][2] . " " . $dest['new_queue_status'];
+$output = `$command`;
+echo $output;
+echo "\n";
+$command = $dest['shell'] . " " . $dest['hostname'][2] . " " . $dest['new_nodes_status'];
+$output = `$command`;
+echo $output;
+echo "\n";
+echo "\n";
+echo "=============================== HPC Queue Status ===============================\n";
+$command = $dest['shell'] . " " . $dest['hostname'][1] . " " . $dest['new_queue_status'];
+$output = `$command`;
+echo $output;
+echo "\n";
+$command = $dest['shell'] . " " . $dest['hostname'][1] . " " . $dest['new_nodes_status'];
 $output = `$command`;
 echo $output;
 echo "\n";
 echo "\n";
 echo "=========================== Legacy HPC  Queue Status ===========================\n";
-$command = $dest['shell'] . " " . $dest['host'] . " " . $dest['old_queue_status'];
+$command = $dest['shell'] . " " . $dest['hostname'][0] . " " . $dest['old_queue_status'];
 $output = `$command`;
 echo $output;
 echo "\n";
 echo "\n";
 echo "============================= Head Node Disk Usage =============================\n";
-$command = $dest['shell'] . " " . $dest['host'] . " " . $dest['disk_free'];
+$command = $dest['shell'] . " " . $dest['hostname'][0] . " " . $dest['disk_free'];
 $output = `$command`;
 echo $output;
 echo "\n";
