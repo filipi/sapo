@@ -13,6 +13,16 @@ echo "<PRE>";
 //echo $_SERVER["REMOTE_ADDR"] . "\n";
 
 echo "=============================== HPC Queue Status ===============================\n";
+$command = $dest['shell'] . " " . $dest['hostname'][3] . " " . $dest['new_queue_status'];
+$output = `$command`;
+echo $output;
+echo "\n";
+$command = $dest['shell'] . " " . $dest['hostname'][3] . " " . $dest['new_nodes_status'];
+$output = `$command`;
+echo $output;
+echo "\n";
+echo "\n";
+echo "=============================== HPC Queue Status ===============================\n";
 $command = $dest['shell'] . " " . $dest['hostname'][2] . " " . $dest['new_queue_status'];
 $output = `$command`;
 echo $output;
