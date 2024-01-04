@@ -63,6 +63,7 @@ foreach($yoloResult['detections'] as $chave => $valor){
     }
   }
 }
+
 // End clock time in seconds
 $end_time = microtime(true);
 
@@ -71,6 +72,7 @@ $execution_time = $end_time - $start_time;
 
 echo "Tempo para carregar essa página = " . $execution_time . " segundos.<BR>";
 echo "Tempo para classificar a imagem = " . $yoloResult['time'] . " segundos.<BR>";
+
 
 if ($persons){
   echo "<H1>". $persons . " pessoa" . ($persons > 1 ? "s" : "") . " detectada" . ($persons > 1 ? "s" : "") . "</H1>";
@@ -97,4 +99,12 @@ echo "<img alt=\"pass through image\" src=\"data:image/png;base64," . base64_enc
 
 #    img2sixel predictions.jpg -w 720
 
+
+# 900000ms = 15 min
+# 120000ms = 2 min
 ?>
+<script>
+setTimeout(function(){
+    window.location.reload(1);
+  }, 120000);
+</script>
