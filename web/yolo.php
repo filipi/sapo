@@ -11,6 +11,10 @@ if (!in_array($_SERVER["REMOTE_ADDR"], $origins)){
   die();
 }
 
+// como na fase de testes estamos utilizando o /tmp
+// precisamos conferir se a pasta cfg e data estão no /tmp
+
+
 //echo "<PRE>";
 //var_dump($origins);
 //echo $_SERVER["REMOTE_ADDR"] . "\n";
@@ -33,9 +37,9 @@ $command = $fswebcam . " -r 1280x720 -F 15 -S 0 -D 0 -p YUYV --png 9 -s brightne
 
 $command = "cd /tmp; " . $fswebcam . " -r 1280x720 -F 15 -S 0 -D 0 -p YUYV --png 9 -s brightness=". $FS_BRIGHT . "% -s contrast=". $FS_CONT . " --quiet -d v4l2:/dev/video0 --no-banner --save /tmp/teste.png; /usr/local/GrandeIdeia/darknet-filipi/darknet detect /usr/local/GrandeIdeia/darknet-filipi/cfg/yolov3.cfg /usr/local/GrandeIdeia/yolov3.weights /tmp/teste.png 2>/dev/null;";
 
-//echo "<PRE>\n";
-//echo $command;
-//echo "</PRE>\n";
+// echo "<PRE>\n";
+// echo $command;
+// echo "</PRE>\n";
 
 $detections = `$command`;
 //$detections = '{"time": 8.238648, "detections":[{"class":"refrigerator","accuracy":55,"x":0.268663,"y":0.747496,"w":0.113972,"h":0.330167},{"class":"tvmonitor","accuracy":95,"x":0.445084,"y":0.255795,"w":0.042415,"h":0.091687},{"class":"tvmonitor","accuracy":68,"x":0.359001,"y":0.492310,"w":0.104961,"h":0.145139},{"class":"chair","accuracy":97,"x":0.520784,"y":0.675333,"w":0.064489,"h":0.295906},{"class":"chair","accuracy":77,"x":0.125792,"y":0.440936,"w":0.065797,"h":0.178660},{"class":"chair","accuracy":66,"x":0.273204,"y":0.387098,"w":0.044044,"h":0.151356},{"class":"bottle","accuracy":53,"x":0.350815,"y":0.541089,"w":0.012717,"h":0.063072},{"class":"person","accuracy":97,"x":0.488964,"y":0.529296,"w":0.111176,"h":0.284606},]}';
